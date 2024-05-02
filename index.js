@@ -1,38 +1,28 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import { config } from 'dotenv';
-import flowerRoutes from './controllers/flower.js';
-// import potRoutes from './controllers/pot.js';
-// import fruitbasketRoutes from './controllers/fruitbasket.js';
-
-
-config();  // This will load the environment variables from the .env file.
+import flowerRoutes from './routes/flowerRoutes.js'; // ensure this path is correct and uses '.js' extension
+import db from './db/conn.js';
 
 const app = express();
-const port = process.env.PORT || 5000;
-
+const PORT = process.env.PORT || 5000;
 app.use(cors());
-app.use(express.json());  // Updated for clarity and consistency.
+app.use(express.json());
 
-app.set('cors engine', 'jsx');
-app.set('cors', './cors');
-app.engine('jsx', jsxCorsEngine());
+// Database connection
+// mongoose.connect(process.env.MONGO_URI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// })
+// .then(() => console.log("MongoDB connection established successfully"))
+// .catch(err => console.error(err));
 
+// Use routes
+app.use('/api/flowers', flowerRoutes);
 
-const flowersRouter = require('./routes/flower')
-
-
-app.use('/flowers', flowersRouter);
-
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log("MongoDB database connection established successfully");
-});
-
-
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+app.listen(PORT, () => {
+    console.log(`Server running `);
 });
