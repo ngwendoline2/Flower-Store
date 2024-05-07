@@ -97,7 +97,6 @@ router.post('/', async(req, res) => {
     console.log(req.body)
 
     try {
-        const createdFruitbasket = await FruitBasket.create(req.body);
         res.status(200).redirect('/fruitbaskets');
     } catch (err) {
         res.status(400).send(err);
@@ -118,7 +117,6 @@ router.get("/:id/edit", async (req, res) => {
 // S - SHOW - show route displays details of an individual fruitbasket
 router.get('/:id', async (req, res) => {
     try {
-        const foundFruitBasket = await FruitBasket.findById(req.params.id);
         res.render('fruitbaskets/Show', {FruitBasket: FruitBasket});
     } catch (err) {
         res.status(400).send(err);

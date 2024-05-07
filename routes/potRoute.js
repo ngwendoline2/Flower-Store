@@ -1,5 +1,4 @@
 import express from 'express';
-import Flower from '../models/Flower.js';
 import Pot from '../models/Pots.js';
 
 const router = express.Router();

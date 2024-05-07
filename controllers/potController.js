@@ -1,4 +1,4 @@
-import Flower from '../models/Pots.js'; // assuming you update Flower model similarly
+import Flower from '../models/Pots.js'; // assuming you update Pots model similarly
 import express from 'express';
 const router = express.Router();
 import  db from '../db/conn.js';
